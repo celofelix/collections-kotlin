@@ -40,7 +40,7 @@ fun testaMap() {
     Nesse exemplo o retorno será uma mensagem
      */
     println(pedidos.getOrElse(5, {
-       "Chave informada não existe"
+        "Chave informada não existe"
     }))
 
     /*
@@ -59,7 +59,7 @@ fun testaMap() {
     E com esse acesso, podemos até mesmo usar um for para percorrer somente as chaves
      */
     println(pedidos.keys)
-    for (numero in pedidos.keys){
+    for (numero in pedidos.keys) {
         println("Código do pedido: $numero")
     }
 
@@ -103,6 +103,42 @@ fun testaMap() {
     }
     println("Pedidos com valores acima de R$ 70.00 $valoresAcima")
 
+    /*
+    O map também existe o operador plus + para fazer a adição de um novo valor
+    O operator plus + ele retorna um novo Map, sem alterar o Map original original
+    Para usar ele sempre precisamos usar o Pair() e passar a chave e seu valor
+    Mas também podemos usar o mapOf() passando a chave e o valor
+    No caso de usar operator plus + não é possível usar o operador infix to para passar a chave e valor
+     */
+    println("Pedido adicionado operador plus e Pair() ${pedidos + Pair(7, 70.0)}")
+    println("Pedido adicionado operador plus e mapOf() ${pedidos + mapOf(8 to 80.0, 9 to 90.0)}")
+
+    /*
+    Além do operador plus + para adicionar temos o operador minus -
+    O operador minutos ele só recebe a chave e através da chave é feita a remoção do valor
+    Pode ser passados apenas 1 única chave ou pode ser passada várias chaves
+    O retorno do operador minus - também é de um novo map sem a alteração do original
+     */
+    println("Pedido removido com operador minus ${pedidos - 1}")
+    println("Pedido removidos com operador minus e listOf() ${pedidos - listOf(1, 2)}")
+
+    /*
+    Existe o operador que altera o Map original e não gera uma cópia
+    Então para adicionar um valor e alterar o Map original deve ser usado o operador plusAssign +=
+    Esse operador ele adiciona e altera o Map original, assim como os métodos put()
+     */
+    pedidos += listOf(7 to 70.0, 8 to 80.0)
+    println("Pedido adicionado ao Map original com operador plusAssign $pedidos")
+
+    /*
+    Assim como o operador plusAssign para adicionar ao Map original, temos para remoção
+    Para remover alterando o Map original temos o minusAssign -=
+    A remoção será baseada na chave, então é necessário informar a chave para remover
+     */
+
+    pedidos -= 8
+    println("Removendo do Map original com operador minusAssign $pedidos")
+
     println(valorPedido)
 
     println(pedidos)
@@ -128,7 +164,8 @@ fun testaMap() {
     Além de adicionar essas formas servem para atualizar um registro existente dentro do Map
     Se a chave informada já exista ele irá atualizar ao invés de inserir um novo registro.
     Caso queira adicionar um valor somente se a chave não existir você pode usar o método putIfAbsent()
-    Com o método utIfAbsent() o valor só será adicionado se a chave não existir
+    Com o método putIfAbsent() o valor só será adicionado se a chave não existir
+    Os métodos de put eles alteram o Map original, não gera uma cópia
      */
 
     pedidos[4] = 70.0
@@ -146,6 +183,9 @@ fun testaMap() {
     Existe o método remove() que basta informar a chave e assim ele irá deletar
     O método remove também existe a sobrecarga para passar a chave e o valor
     A remoção só será feita caso a chave e o valor estejam corretos, caso contrario não será removido
+    O remove pode ser feito somente com o valor que exista no Map
+    Mas caso haja valores iguais no Map ele remove o primeiro que encontrar
+    O remove altera o Map original, não criando uma cópia
      */
     pedidos.remove(6)
     println(pedidos)
