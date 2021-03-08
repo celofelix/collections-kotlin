@@ -3,9 +3,11 @@ package br.com.alura
 fun main() {
 
     val banco = BancoDeNomes()
+    println(banco.nomes)
+    val nomesSalvos: Collection<String> = banco.nomes
 //    banco.nomes.sal("Alex")
     banco.salva("Alex")
-    println(banco.nomes)
+    println("Variável com a cópia $nomesSalvos")
     println(BancoDeNomes().nomes)
 }
 
@@ -15,7 +17,7 @@ class BancoDeNomes {
         private val dados = mutableListOf<String>()
     }
 
-    val nomes: Collection<String> get() = Companion.dados
+    val nomes: Collection<String> get() = Companion.dados.toList()
 
     fun salva(nome: String) {
         Companion.dados.add(nome)
